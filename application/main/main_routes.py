@@ -21,17 +21,29 @@ def home():
     return render_template('index.html')
 
 
-@main_bp.route('/about', methods=['GET'])
+@main_bp.route('/about', methods=['GET', 'POST'])
 def main():
     if request.method == "POST":
         sms_message = request.form['smsMessage']
         phone_number = request.form['phoneNumber']
-
-        print(sms_message)
-        print(phone_number)
-
         response = sms.send(sms_message,[phone_number])
-        print(response)
-
 
     return render_template('index.html')
+
+
+
+@main_bp.route('/messages', methods=['GET', 'POST'])
+def messages():
+    pass
+
+@main_bp.route('/messages/<int:id>', methods=['GET'])
+def messages(id):
+    pass
+
+@main_bp.route('/subscribers', methods=['GET', 'POST'])
+def subscribers():
+    pass
+
+@main_bp.route('/subscribers/<int:id>', methods=['GET'])
+def subscriber(id):
+    pass

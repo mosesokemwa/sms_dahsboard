@@ -6,9 +6,12 @@ class Config:
     """Set Flask configuration vars."""
 
     """Base config vars."""
-    # SECRET_KEY = os.environ.get('SECRET_KEY')
-    # SESSION_COOKIE_NAME = os.environ.get('SESSION_COOKIE_NAME')
-    SQLALCHEMY_TRACK_MODIFICATIONS=True
+    # Database
+    SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI')
+    SQLALCHEMY_TRACK_MODIFICATIONS = os.environ.get('SQLALCHEMY_TRACK_MODIFICATIONS')
+    SECRET_KEY = os.environ.get('SECRET_KEY')
+    SESSION_COOKIE_NAME = os.environ.get('SMS_DASHBOARD_COOKIE')
+
      # Africa's Talking Config
     USERNAME=os.environ.get('USERNAME')
     API_KEY=os.environ.get('API_KEY')

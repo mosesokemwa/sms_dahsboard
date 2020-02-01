@@ -1,10 +1,12 @@
 from flask import Flask, g
 from flask_sqlalchemy import SQLAlchemy
 from flask_session import Session
+from flask_login import LoginManager
 import config
 
 # Globally accessible libraries
 db = SQLAlchemy()
+login_manager = LoginManager()
 
 
 def create_app():
@@ -14,6 +16,8 @@ def create_app():
 
     # Initialize Plugins
     db.init_app(app)
+    login_manager.init_app(app)
+
 
     with app.app_context():
         # Include our Routes
@@ -21,5 +25,7 @@ def create_app():
 
         # Register Blueprints
         app.register_blueprint(main_routes.main_bp, url_prefix="/main")
+         # Initialize Global db
+        db.create_all()
 
         return app
