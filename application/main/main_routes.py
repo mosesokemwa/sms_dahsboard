@@ -1,19 +1,19 @@
 """Routes for main pages."""
+import os
 from flask import Blueprint, render_template, request
 from flask import current_app as app
 # from .assets import compile_main_assets
 import africastalking
 
 # Blueprint Configuration
-main_bp = Blueprint('main_bp', __name__,
-                    template_folder='templates',
-                    static_folder='static')
+main_bp = Blueprint('main_bp', __name__, template_folder='templates', static_folder='static')
 # compile_main_assets(app)
+username = os.getenv('USERNAME', 'sandbox')
+api_key = os.getenv('API_KEY', 'fake')
 
-username = app.config['USERNAME']
-api_key = app.config['API_KEY']
+
 africastalking.initialize(username, api_key)
-
+sms = africastalking.SMS
 
 @main_bp.route('/', methods=['GET'])
 def home():
@@ -34,11 +34,8 @@ def main():
 
 @main_bp.route('/messages', methods=['GET', 'POST'])
 def messages():
-    pass
+    return render_template('messages.html')
 
-@main_bp.route('/messages/<int:id>', methods=['GET'])
-def messages(id):
-    pass
 
 @main_bp.route('/subscribers', methods=['GET', 'POST'])
 def subscribers():

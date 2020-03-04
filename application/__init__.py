@@ -1,8 +1,8 @@
+import config
 from flask import Flask, g
 from flask_sqlalchemy import SQLAlchemy
 from flask_session import Session
 from flask_login import LoginManager
-import config
 
 # Globally accessible libraries
 db = SQLAlchemy()
@@ -24,7 +24,7 @@ def create_app():
         from .main import main_routes
 
         # Register Blueprints
-        app.register_blueprint(main_routes.main_bp, url_prefix="/main")
+        app.register_blueprint(main_routes.main_bp)
          # Initialize Global db
         db.create_all()
 
