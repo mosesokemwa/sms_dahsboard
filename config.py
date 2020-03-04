@@ -1,7 +1,6 @@
 """Flask config class."""
 import os
 
-
 class Config:
     """Set Flask configuration vars."""
 
@@ -15,21 +14,16 @@ class Config:
     USERNAME=os.environ.get('USERNAME')
     API_KEY=os.environ.get('API_KEY')
 
-class TestConfig(Config):
-    TESTING = True
-    SQLALCHEMY_DATABASE_URI = 'sqlite://'
-
-class ProdConfig(Config):
-    DEBUG = False
-    TESTING = False
-    DATABASE_URI = os.environ.get('PROD_DATABASE_URI')
-
-
-class DevConfig(Config):
     DEBUG = True
     TESTING = True
-    DATABASE_URI = os.environ.get('DEV_DATABASE_URI')
-    SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI')
+    SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI_DEV') or 'postgresql+psycopg2://swag:password@localhost/sms_dashboard_dev'
+
+# class TestConfig(Config):
+#     TESTING = True
+#     SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI_TEST')
 
 
-    # General Config
+# class ProdConfig(Config):
+#     DEBUG = False
+#     TESTING = False
+#     DATABASE_URI = os.environ.get('PROD_DATABASE_URI')

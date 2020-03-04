@@ -4,6 +4,11 @@ from flask import Blueprint, render_template, request
 from flask import current_app as app
 # from .assets import compile_main_assets
 import africastalking
+from .models import db, MessageStoreModel
+from faker import Faker
+from datetime import datetime
+
+fake = Faker()
 
 # Blueprint Configuration
 main_bp = Blueprint('main_bp', __name__, template_folder='templates', static_folder='static')
@@ -30,11 +35,9 @@ def main():
 
     return render_template('index.html')
 
-
-
 @main_bp.route('/messages', methods=['GET', 'POST'])
 def messages():
-    return render_template('messages.html')
+    return render_template('messages.html', messages=MessageStoreModel.query.all())
 
 
 @main_bp.route('/subscribers', methods=['GET', 'POST'])

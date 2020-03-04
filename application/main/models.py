@@ -1,18 +1,15 @@
-from . import db
+from application import db
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
-
-class User(UserMixin, db.Model):
+class UserModel(UserMixin, db.Model):
     """Model for user accounts."""
-
-    __tablename__ = 'flasklogin-users'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False, unique=False)
     email = db.Column(db.String(40), unique=True, nullable=False)
     password = db.Column(db.String(200), primary_key=False, unique=False, nullable=False)
-    website = db.Column(db.String(60), index=False, unique=False, nullable=True)
+    admin = db.Column(db.Boolean, index=False, unique=False, nullable=False)
     created_on = db.Column(db.DateTime, index=False, unique=False, nullable=True)
     last_login = db.Column(db.DateTime, index=False, unique=False, nullable=True)
 
@@ -29,24 +26,21 @@ class User(UserMixin, db.Model):
 
 class MessageStoreModel(db.Model):
     """Model for stored messages"""
-    __tablename__ = 'flaskstore-messages'
 
     id = db.Column(db.Integer, primary_key=True)
     text_message = db.Column(db.String(140), nullable=False, unique=False)
     email = db.Column(db.String(40), unique=True, nullable=False)
-    sent_boolean = db.Column(db.Boolen, default=False, nullable=False)
+    sent_boolean = db.Column(db.Boolean, default=False, nullable=False)
     created_on = db.Column(db.DateTime, index=False, unique=False, nullable=True)
     last_login = db.Column(db.DateTime, index=False, unique=False, nullable=True)
 
 
 class SubscribeModel(db.Model):
-    """Model for stored subscribers detaisl"""
-    __tablename__ = 'flaskstore-subscribers'
+    """Model for stored subscribers details"""
 
     id = db.Column(db.Integer, primary_key=True)
     phone_number = db.Column(db.Integer, nullable=False, unique=False)
     email = db.Column(db.String(40), unique=False, nullable=True)
-    sent_message_id =id = db.Column(db.Integer)
     created_on = db.Column(db.DateTime, index=False, unique=False, nullable=True)
     last_login = db.Column(db.DateTime, index=False, unique=False, nullable=True)
 
