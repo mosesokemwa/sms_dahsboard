@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block body %}
+<form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.text_message.label }}<br>
+        {{ form.text_message(size=32) }}<br>
+        {% for error in form.text_message.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.email.label }}<br>
+        {{ form.email(size=32) }}<br>
+        {% for error in form.email.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>{{ form.submit() }}</p>
+</form>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+{% endblock body %}

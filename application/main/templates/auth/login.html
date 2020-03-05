@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block pagestyles %}
+<link href="{{ url_for('static', filename='dist/css/account.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block body %}
+<h1>Login In</h1>
+<div>
+  <p class="errors">{{ error }}</p>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    {{ wtf.quick_form(form) }}
+  </div>
+</div>
+<br>
+<div class="loginsignup">
+  <span>Need an account?
+    <a href="{{ url_for('main_bp.register') }}">
+      <input class="btn btn-default" id="submit" name="submit" type="submit" value="Sign Up">
+    </a>
+    <span>
+</div>
+{% endblock %}

@@ -12,8 +12,53 @@
 </head>
 
 <body>
-    {% block body %}
-    {% endblock %}
+    <div class="wrapper flex">
+        <div class="menubar">
+            <div class="menubar-row">
+                <nav class="nav">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a href="#/1">
+                                <div class="nav-item-container">All Subscribers</div>
+                            </a>
+                        </li>
+                        <li class="nav-item active selected">
+                            <a href="{{ url_for('main_bp.all_messages') }}">
+                                <div class="nav-item-container">All Messages</div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url_for('main_bp.create_messages') }}">
+                                <div class="nav-item-container">Create Message</div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#/4">
+                                <div class="nav-item-container">Settings</div>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="main">
+            <div class="main-container">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                    <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% endwith %}
+                <!-- /.menubar -->
+                {% block body %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+    <!-- /.wrapper -->
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
